@@ -224,6 +224,40 @@
     padding:5px 9px;
   }
 
+  /* ---------- stats ---------- */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--panel-line);
+    border:1px solid var(--panel-line);
+    margin-top:20px;
+  }
+  .stat{ background:var(--panel); padding:26px 24px; }
+  .stat .num{ font-family:'Newsreader','Noto Serif JP',serif; font-size:34px; color:var(--gold); }
+  .stat .cap{ font-size:13px; color:var(--ink-dim); margin-top:8px; }
+
+  /* ---------- work / projects ---------- */
+  .work-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--panel-line);
+    border:1px solid var(--panel-line);
+    margin-top:20px;
+  }
+  .work-card{ background:var(--panel); display:flex; flex-direction:column; }
+  .work-shot{ aspect-ratio:16/10; overflow:hidden; background:#0c1015; }
+  .work-shot img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .work-body{ padding:22px 22px 24px; display:flex; flex-direction:column; flex:1; }
+  .work-role{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold); margin-bottom:8px; }
+  .work-title{ font-size:19px; margin-bottom:10px; }
+  .work-tools{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+  .work-result{ font-size:13.5px; color:var(--ink-dim); margin-bottom:16px; flex:1; }
+  .work-link{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--gold); border-bottom:1px solid var(--gold-dim); align-self:flex-start; padding-bottom:2px; }
+  .work-link:hover{ border-color:var(--gold); }
+  .work-note{ margin-top:22px; font-size:12.5px; color:var(--ink-dim); }
+
   /* ---------- timeline ---------- */
   .tl{ position:relative; padding-left:110px; }
   .tl::before{
@@ -285,6 +319,8 @@
     .profile-grid{ grid-template-columns:1fr; }
     .photo{ max-width:220px; }
     .skills-grid{ grid-template-columns:1fr; }
+    .work-grid{ grid-template-columns:1fr; }
+    .stats{ grid-template-columns:1fr; }
     .tl{ padding-left:80px; }
     .tl-year{ left:-80px; width:50px; }
     .tl-item::after{ left:-30.5px; }
@@ -363,6 +399,82 @@
   </div>
 </section>
 
+<section class="work">
+  <div class="wrap">
+    <span class="label mono">WORK — <span data-jp>制作実績</span><span data-en style="display:none">SELECTED PROJECTS</span></span>
+
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="work-shot"><img src="https://static.wixstatic.com/media/2e2282_3700fc9f580b4e4f8005abc5996e8fc1~mv2.jpg" alt="Corporate website project"></div>
+        <div class="work-body">
+          <span class="work-role mono" data-jp>プロジェクトリーダー</span><span class="work-role mono" data-en style="display:none">PROJECT LEADER</span>
+          <h3 class="work-title serif" data-jp>自社コーポレートサイト開発</h3>
+          <h3 class="work-title serif" data-en style="display:none">Corporate Website Development</h3>
+          <div class="work-tools">
+            <span class="tag">WIX</span><span class="tag">HTML/CSS</span><span class="tag">SQL</span>
+          </div>
+          <p class="work-result" data-jp>要件定義から運用まで一貫して担当し、[チーム人数]名のメンバーを率いてリリースまで牽引。</p>
+          <p class="work-result" data-en style="display:none">Owned the project end-to-end from requirements to operations, leading a team of [team size] through release.</p>
+          <a class="work-link" href="#" data-jp>Notionで詳しく見る →</a><a class="work-link" href="#" data-en style="display:none">See case study →</a>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-shot"><img src="https://static.wixstatic.com/media/2e2282_1a4ece2d45e94ec89a7760bd5537b645~mv2.png" alt="Network and server infrastructure project"></div>
+        <div class="work-body">
+          <span class="work-role mono" data-jp>インフラエンジニア</span><span class="work-role mono" data-en style="display:none">INFRASTRUCTURE ENGINEER</span>
+          <h3 class="work-title serif" data-jp>社内ネットワーク・サーバー基盤構築</h3>
+          <h3 class="work-title serif" data-en style="display:none">Network &amp; Server Infrastructure</h3>
+          <div class="work-tools">
+            <span class="tag">Linux</span><span class="tag">AWS</span><span class="tag">Networking</span>
+          </div>
+          <p class="work-result" data-jp>回線・サーバー構築とPBX保守を担当し、問い合わせ対応時間を[◯◯%]短縮。</p>
+          <p class="work-result" data-en style="display:none">Built out line/server infrastructure and maintained PBX systems, cutting support response time by [XX%].</p>
+          <a class="work-link" href="#" data-jp>Notionで詳しく見る →</a><a class="work-link" href="#" data-en style="display:none">See case study →</a>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-shot"><img src="https://static.wixstatic.com/media/2e2282_b65406ff9759407fbb1a11d3cb83a770~mv2.png" alt="Android app development project"></div>
+        <div class="work-body">
+          <span class="work-role mono" data-jp>プログラマー</span><span class="work-role mono" data-en style="display:none">PROGRAMMER</span>
+          <h3 class="work-title serif" data-jp>Androidアプリ開発</h3>
+          <h3 class="work-title serif" data-en style="display:none">Android App Development</h3>
+          <div class="work-tools">
+            <span class="tag">Java</span><span class="tag">Android</span>
+          </div>
+          <p class="work-result" data-jp>キャリア初期に担当したモバイル開発案件。基礎的な開発フローを習得。</p>
+          <p class="work-result" data-en style="display:none">An early-career mobile development project where I learned core development workflows.</p>
+          <a class="work-link" href="#" data-jp>Notionで詳しく見る →</a><a class="work-link" href="#" data-en style="display:none">See case study →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num">[◯]名</div>
+        <div class="cap mono" data-jp>チームを率いた人数</div>
+        <div class="cap mono" data-en style="display:none">Team members led</div>
+      </div>
+      <div class="stat">
+        <div class="num">[◯]件</div>
+        <div class="cap mono" data-jp>要件定義〜運用まで一貫対応したプロジェクト</div>
+        <div class="cap mono" data-en style="display:none">Projects owned end-to-end</div>
+      </div>
+      <div class="stat">
+        <div class="num">[◯]年</div>
+        <div class="cap mono" data-jp>IT業界での経験年数</div>
+        <div class="cap mono" data-en style="display:none">Years in IT</div>
+      </div>
+    </div>
+
+    <p class="work-note mono">
+      <span data-jp>※ [◯] の部分と Notion リンク先は実際の数値・URLに差し替えてください。</span>
+      <span data-en style="display:none">※ Replace the bracketed placeholders and Notion links with real numbers and URLs.</span>
+    </p>
+  </div>
+</section>
+
 <section class="skills">
   <div class="wrap">
     <span class="label mono">SKILLS — <span data-jp>できること</span><span data-en style="display:none">WHAT I DO</span></span>
@@ -377,6 +489,9 @@
           <span class="tag" data-jp>進行管理</span><span class="tag" data-en style="display:none">Progress Mgmt</span>
           <span class="tag" data-jp>チーム編成</span><span class="tag" data-en style="display:none">Team Building</span>
           <span class="tag" data-jp>顧客対応</span><span class="tag" data-en style="display:none">Client Liaison</span>
+        </div>
+        <div class="taglist" style="margin-top:8px;">
+          <span class="tag">Jira</span><span class="tag">Trello</span><span class="tag">Notion</span><span class="tag">Slack</span><span class="tag">Backlog</span>
         </div>
       </div>
       <div class="skill">
@@ -462,7 +577,10 @@
     <span class="label mono">CONTACT — <span data-jp>連絡先</span><span data-en style="display:none">GET IN TOUCH</span></span>
     <h2 class="serif" data-jp>お気軽にご連絡ください。</h2>
     <h2 class="serif" data-en style="display:none">Let's talk.</h2>
-    <a class="mail mono" href="mailto:nwaynwayko1@gmail.com">nwaynwayko1@gmail.com</a>
+    <div style="display:flex; flex-wrap:wrap; gap:24px; align-items:baseline;">
+      <a class="mail mono" href="mailto:nwaynwayko1@gmail.com">nwaynwayko1@gmail.com</a>
+      <a class="mail mono" href="https://www.linkedin.com/in/YOUR-LINKEDIN-ID" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
 
     <div class="copyright mono">
       <span>© 2024 Nway Nway Ko</span>
