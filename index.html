@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nway Nway Ko — Project Leader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=Noto+Serif+JP:wght@400;600&family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10151c;
+    --panel: #161d26;
+    --panel-line: #2a333d;
+    --ink: #ece5d6;
+    --ink-dim: #97a2ab;
+    --gold: #c99a4b;
+    --gold-dim: #7d6538;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter','Noto Sans JP',sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3, .serif{
+    font-family:'Newsreader','Noto Serif JP',serif;
+    font-weight:500;
+    margin:0;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:.03em;
+  }
+
+  a{ color:inherit; }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- lang toggle ---------- */
+  .langbar{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:50;
+    display:flex;
+    justify-content:flex-end;
+    padding:22px 32px;
+    pointer-events:none;
+  }
+  .langbar .wrap{ display:none; }
+  .langtoggle{
+    pointer-events:auto;
+    display:flex;
+    gap:2px;
+    background:rgba(16,21,28,.6);
+    backdrop-filter: blur(6px);
+    border:1px solid var(--panel-line);
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .langtoggle button{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    background:none;
+    border:none;
+    color:var(--ink-dim);
+    padding:9px 14px;
+    cursor:pointer;
+    transition:color .2s, background .2s;
+  }
+  .langtoggle button.active{
+    color:var(--bg);
+    background:var(--gold);
+  }
+  .langtoggle button:hover:not(.active){ color:var(--ink); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding-top:80px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(var(--panel-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--panel-line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:.18;
+    mask-image: radial-gradient(ellipse 70% 60% at 30% 40%, black 10%, transparent 75%);
+    pointer-events:none;
+  }
+  .hero .eyebrow{
+    color:var(--gold);
+    font-size:13px;
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(48px, 8vw, 96px);
+    line-height:1.03;
+    letter-spacing:-.01em;
+  }
+  .hero .kana{
+    color:var(--ink-dim);
+    font-size:clamp(15px,2vw,19px);
+    margin-top:14px;
+    font-family:'Noto Serif JP', serif;
+  }
+  .hero .role{
+    margin-top:34px;
+    font-size:clamp(18px, 2.4vw, 24px);
+    max-width:640px;
+    color:var(--ink);
+  }
+  .hero .route{
+    margin-top:46px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    color:var(--ink-dim);
+    font-size:13px;
+  }
+  .hero .route .dot{ width:5px; height:5px; border-radius:50%; background:var(--gold); }
+
+  /* ---------- section shell ---------- */
+  section{ padding:110px 0; border-top:1px solid var(--panel-line); }
+  .label{
+    color:var(--gold);
+    font-size:12px;
+    margin-bottom:18px;
+    display:block;
+  }
+
+  /* ---------- vision ---------- */
+  .vision{
+    text-align:center;
+  }
+  .vision p{
+    font-family:'Newsreader','Noto Serif JP',serif;
+    font-style:italic;
+    font-size:clamp(21px, 3vw, 30px);
+    line-height:1.65;
+    max-width:760px;
+    margin:0 auto;
+    color:var(--ink);
+  }
+  .vision .rule{
+    width:40px; height:1px; background:var(--gold);
+    margin:0 auto 34px;
+  }
+
+  /* ---------- profile ---------- */
+  .profile-grid{
+    display:grid;
+    grid-template-columns: 240px 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+  }
+  .photo{
+    aspect-ratio: 3/4;
+    overflow:hidden;
+  }
+  .photo img{ width:100%; height:100%; object-fit:cover; display:block; filter: grayscale(15%); }
+  .facts{
+    border-top:1px solid var(--panel-line);
+    padding:18px 20px;
+  }
+  .facts div{ display:flex; justify-content:space-between; padding:9px 0; font-size:13px; border-bottom:1px solid var(--panel-line); }
+  .facts div:last-child{ border-bottom:none; }
+  .facts .k{ color:var(--ink-dim); }
+  .profile-text h2{ font-size:28px; margin-bottom:22px; }
+  .profile-text p{ color:var(--ink); max-width:62ch; font-size:16px; }
+
+  /* ---------- skills ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--panel-line);
+    border:1px solid var(--panel-line);
+  }
+  .skill{
+    background:var(--panel);
+    padding:32px 28px;
+  }
+  .skill h3{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:500;
+    font-size:14px;
+    color:var(--gold);
+    margin-bottom:16px;
+  }
+  .skill p{ font-size:14.5px; color:var(--ink); margin-bottom:18px; }
+  .taglist{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--ink-dim);
+    border:1px solid var(--panel-line);
+    padding:5px 9px;
+  }
+
+  /* ---------- timeline ---------- */
+  .tl{ position:relative; padding-left:110px; }
+  .tl::before{
+    content:"";
+    position:absolute;
+    left:70px; top:6px; bottom:6px;
+    width:1px;
+    background:var(--panel-line);
+  }
+  .tl-item{ position:relative; padding-bottom:46px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-year{
+    position:absolute;
+    left:-110px; top:0;
+    width:70px;
+    text-align:right;
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--gold);
+    font-size:14px;
+  }
+  .tl-item::after{
+    content:"";
+    position:absolute;
+    left:-40.5px; top:6px;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--gold);
+  }
+  .tl-item p{ font-size:15px; max-width:56ch; color:var(--ink); }
+  .tl-item .tl-tag{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-dim); margin-bottom:6px; display:block; }
+
+  /* ---------- contact / footer ---------- */
+  footer{
+    padding:100px 0 60px;
+    border-top:1px solid var(--panel-line);
+  }
+  footer h2{ font-size:clamp(32px,5vw,52px); margin-bottom:26px; }
+  .mail{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:16px;
+    color:var(--gold);
+    border-bottom:1px solid var(--gold-dim);
+    padding-bottom:4px;
+  }
+  .mail:hover{ border-color:var(--gold); }
+  .copyright{
+    margin-top:80px;
+    font-size:12px;
+    color:var(--ink-dim);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  @media (max-width: 720px){
+    .profile-grid{ grid-template-columns:1fr; }
+    .photo{ max-width:220px; }
+    .skills-grid{ grid-template-columns:1fr; }
+    .tl{ padding-left:80px; }
+    .tl-year{ left:-80px; width:50px; }
+    .tl-item::after{ left:-30.5px; }
+    section{ padding:70px 0; }
+  }
+
+  [data-i18n]{ }
+  .lang-en [data-jp]{ display:none; }
+  .lang-jp [data-en]{ display:none; }
+</style>
+</head>
+<body class="lang-jp">
+
+<div class="langbar">
+  <div class="wrap"></div>
+  <div class="langtoggle">
+    <button class="mono" data-set="jp">JP</button>
+    <button class="mono" data-set="en">EN</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow mono" data-jp>プロジェクトリーダー / WEB開発</span>
+    <span class="eyebrow mono" data-en>PROJECT LEADER / WEB DEVELOPMENT</span>
+
+    <h1>Nway Nway Ko</h1>
+    <div class="kana">ヌェヌェコ</div>
+
+    <p class="role">
+      <span data-jp>ミャンマー出身。開発・インフラの実務経験を土台に、<br>要件定義から運用まで一貫してチームを導くプロジェクトリーダーです。</span>
+      <span data-en>From Myanmar. Grounded in hands-on development and infrastructure experience, leading teams end-to-end — from requirements definition through to operations.</span>
+    </p>
+
+    <div class="route mono">
+      <span data-jp>Yangon → Tokyo</span><span data-en>Yangon → Tokyo</span>
+      <span class="dot"></span>
+      <span data-jp>ゲームと旅行が好きです</span><span data-en>Games &amp; travel enthusiast</span>
+    </div>
+  </div>
+</header>
+
+<section class="vision">
+  <div class="wrap">
+    <span class="label mono" data-jp>VISION — ビジョン</span>
+    <span class="label mono" data-en style="display:none">VISION</span>
+    <div class="rule"></div>
+    <p data-jp>現場の技術力と多様なメンバーの力を一つにまとめながら、要件定義から運用まで責任を持ってやり遂げるプロジェクトリーダーを目指します。お客様と社会の双方に信頼される仕組みづくりを通じて、チームと成果を着実に前進させていきます。</p>
+    <p data-en style="display:none">My goal is to be a project leader who brings together technical depth and a diverse team, taking full ownership from requirements definition through to operations. By building systems trusted by both clients and society, I move teams and outcomes steadily forward.</p>
+  </div>
+</section>
+
+<section class="profile">
+  <div class="wrap">
+    <span class="label mono">PROFILE — <span data-jp>私について</span><span data-en style="display:none">ABOUT ME</span></span>
+    <div class="profile-grid" style="margin-top:20px;">
+      <div>
+        <div class="card photo">
+          <img src="https://static.wixstatic.com/media/2e2282_16ff2c7e42ae4dfc910c0e04b4c741be~mv2.jpg" alt="Nway Nway Ko">
+        </div>
+        <div class="card facts">
+          <div><span class="k mono" data-jp>出身</span><span class="k mono" data-en style="display:none">ORIGIN</span><span data-jp>ミャンマー</span><span data-en style="display:none">Myanmar</span></div>
+          <div><span class="k mono" data-jp>役割</span><span class="k mono" data-en style="display:none">ROLE</span><span data-jp>プロジェクトリーダー</span><span data-en style="display:none">Project Leader</span></div>
+          <div><span class="k mono" data-jp>在住</span><span class="k mono" data-en style="display:none">BASED IN</span><span>Tokyo, JP</span></div>
+          <div><span class="k mono" data-jp>興味</span><span class="k mono" data-en style="display:none">INTERESTS</span><span data-jp>ゲーム・旅行</span><span data-en style="display:none">Games, Travel</span></div>
+        </div>
+      </div>
+
+      <div class="profile-text">
+        <h2 class="serif" data-jp>ヌェヌェコと申します。</h2>
+        <h2 class="serif" data-en style="display:none">Hello, I'm Nway Nway Ko.</h2>
+        <p data-jp>ミャンマー出身です。技術大学を卒業後、日系企業でプログラマーとして勤務し、それから開発・ネットワークなど幅広くIT分野で経験を積みました。現在は自社ウェブサイトのプロジェクトでリーダーを務め、計画立案・進行管理・メンバー選定から、要件定義・運用保守までを一貫して担当し、お客様の要望に応じた対応を行っています。より良いアウトプットをチームに還元したいという想いから、Webデザインスクールにも通い、知見を広げています。</p>
+        <p data-en style="display:none">I'm from Myanmar. After graduating from a technical university, I worked as a programmer at a Japanese company, then built broad experience across development and networking. I now lead an in-house website project — handling everything from planning, progress management, and team selection through to requirements definition and ongoing operations, while responding directly to client needs. To bring even better output back to my team, I'm also attending a web design school to broaden my knowledge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="skills">
+  <div class="wrap">
+    <span class="label mono">SKILLS — <span data-jp>できること</span><span data-en style="display:none">WHAT I DO</span></span>
+    <div class="skills-grid" style="margin-top:20px;">
+      <div class="skill">
+        <h3 data-jp>リーダーシップ</h3>
+        <h3 data-en style="display:none">LEADERSHIP</h3>
+        <p data-jp>計画立案から進行管理、メンバー選定まで、プロジェクトを一貫して導きます。</p>
+        <p data-en style="display:none">I guide projects end-to-end — from planning through progress management and team selection.</p>
+        <div class="taglist">
+          <span class="tag" data-jp>要件定義</span><span class="tag" data-en style="display:none">Requirements</span>
+          <span class="tag" data-jp>進行管理</span><span class="tag" data-en style="display:none">Progress Mgmt</span>
+          <span class="tag" data-jp>チーム編成</span><span class="tag" data-en style="display:none">Team Building</span>
+          <span class="tag" data-jp>顧客対応</span><span class="tag" data-en style="display:none">Client Liaison</span>
+        </div>
+      </div>
+      <div class="skill">
+        <h3>CODING</h3>
+        <p data-jp>下記の言語でデザインを正確に再現し、プログラミングも行います。</p>
+        <p data-en style="display:none">I translate designs into accurate code, and build with the following languages.</p>
+        <div class="taglist">
+          <span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">Java</span><span class="tag">VBA / VB.net</span><span class="tag">SQL</span><span class="tag">MySQL</span><span class="tag">PostgreSQL</span>
+        </div>
+      </div>
+      <div class="skill">
+        <h3 data-jp>IT インフラ</h3>
+        <h3 data-en style="display:none">IT INFRASTRUCTURE</h3>
+        <p data-jp>PCやサーバー、OS・データベース、LANなどのネットワークまで扱えます。</p>
+        <p data-en style="display:none">Comfortable across PCs, servers, OS and databases, and LAN networking.</p>
+        <div class="taglist">
+          <span class="tag">Linux</span><span class="tag">Red Hat</span><span class="tag">AWS</span><span class="tag">Networking</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="also mono" style="margin-top:22px; font-size:12.5px; color:var(--ink-dim);">
+      <span data-jp>+ デザインも対応：WIX / WordPress / Figma / Canva / Photoshop</span>
+      <span data-en style="display:none">+ Also comfortable with design: WIX / WordPress / Figma / Canva / Photoshop</span>
+    </div>
+  </div>
+</section>
+
+<section class="bio">
+  <div class="wrap">
+    <span class="label mono">BIOGRAPHY — <span data-jp>これまでの歩み</span><span data-en style="display:none">CAREER TIMELINE</span></span>
+    <div class="tl" style="margin-top:40px;">
+
+      <div class="tl-item">
+        <div class="tl-year">2012</div>
+        <span class="tl-tag mono" data-jp>ミャンマー</span><span class="tl-tag mono" data-en style="display:none">MYANMAR</span>
+        <p data-jp>モービ技術大学を卒業。電子電気工学を専攻しました。</p>
+        <p data-en style="display:none">Graduated from a technical university in Myanmar, majoring in Electronics &amp; Electrical Engineering.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2013</div>
+        <span class="tl-tag mono" data-jp>ミャンマー</span><span class="tl-tag mono" data-en style="display:none">MYANMAR</span>
+        <p data-jp>日系企業 CloudSource Myanmar Co., Ltd. に入社。プログラミングを学び、Androidプログラマーとして活躍しました。</p>
+        <p data-en style="display:none">Joined CloudSource Myanmar Co., Ltd, a Japanese-affiliated company. Learned programming and worked as an Android programmer.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2015</div>
+        <span class="tl-tag mono" data-jp>来日</span><span class="tl-tag mono" data-en style="display:none">MOVED TO JAPAN</span>
+        <p data-jp>株式会社ウイルテックに転職し、社内SEとして活躍。初めて訪れた日本で技術・自然・人々の優しさに触れ、日本が大好きになりました。</p>
+        <p data-en style="display:none">Joined Wiltec Co., Ltd. in Japan as an in-house systems engineer. Experiencing Japan for the first time — its technology, nature, and people's kindness — I fell in love with the country.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2019</div>
+        <span class="tl-tag mono" data-jp>日本</span><span class="tl-tag mono" data-en style="display:none">JAPAN</span>
+        <p data-jp>幅広い技術を身につけるため株式会社プロディライトに転職。インフラエンジニアとしてネットワークPBXや回線・サーバー構築、問い合わせ対応、ログ調査などを担当しました。</p>
+        <p data-en style="display:none">Moved to Prodelight Co., Ltd. to broaden my technical skillset. Worked as an infrastructure engineer on network PBX, line and server construction, support response, and log investigation.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2022</div>
+        <span class="tl-tag mono" data-jp>日本</span><span class="tl-tag mono" data-en style="display:none">JAPAN</span>
+        <p data-jp>最初に働いたウイルテックからスカウトを受け再入社。自社ウェブサイトの開発リーダーとして、計画立案・進行管理・メンバー選定、開発から運用改善までの責任者候補を務めています。</p>
+        <p data-en style="display:none">Scouted back by Wiltec, the company I first worked at in Japan. Now serving as Web Development Lead for the company website — responsible for planning, progress management, team selection, and candidate lead for ongoing development and improvement.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year mono" data-jp>現在</div>
+        <div class="tl-year mono" data-en style="display:none">NOW</div>
+        <span class="tl-tag mono" data-jp>現在進行形</span><span class="tl-tag mono" data-en style="display:none">ONGOING</span>
+        <p data-jp>自社サイトの開発責任者を務めながら、WEBCOACHのWebスクールでデザイン・マーケティング・ビジネススキルを学び、プロジェクトリーダーとしての視野を広げています。</p>
+        <p data-en style="display:none">While leading development of the company website, I'm attending the WEBCOACH web school — studying design, marketing, and business skills to broaden my perspective as a project leader.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="label mono">CONTACT — <span data-jp>連絡先</span><span data-en style="display:none">GET IN TOUCH</span></span>
+    <h2 class="serif" data-jp>お気軽にご連絡ください。</h2>
+    <h2 class="serif" data-en style="display:none">Let's talk.</h2>
+    <a class="mail mono" href="mailto:nwaynwayko1@gmail.com">nwaynwayko1@gmail.com</a>
+
+    <div class="copyright mono">
+      <span>© 2024 Nway Nway Ko</span>
+      <span data-jp>Yangon, Myanmar → Tokyo, Japan</span>
+      <span data-en style="display:none">Yangon, Myanmar → Tokyo, Japan</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.langtoggle button');
+  function setLang(lang){
+    document.body.classList.toggle('lang-en', lang === 'en');
+    document.body.classList.toggle('lang-jp', lang === 'jp');
+    document.querySelectorAll('[data-jp]').forEach(el => el.style.display = (lang === 'jp') ? '' : 'none');
+    document.querySelectorAll('[data-en]').forEach(el => el.style.display = (lang === 'en') ? '' : 'none');
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.set === lang));
+    document.documentElement.lang = lang;
+  }
+  buttons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.set)));
+  setLang('jp');
+</script>
+
+</body>
+</html>
